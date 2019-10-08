@@ -31,12 +31,16 @@ local function Input(event)
             -- if OptionSelect[cursorindex[2]][cursorindex[1]] then
                 -- SCREENMAN:GetTopScreen():SetNextScreenName( OptionSelect[cursorindex[2]][cursorindex[1]] ):StartTransitioningScreen("SM_GoToNextScreen")
             -- end
+            for _,pn in pairs( GAMESTATE:GetEnabledPlayers() ) do
+                GAMESTATE:SetCharacter(pn, Items[cursorindex[pn]]:GetCharacterID() )
+            end
             SCREENMAN:GetTopScreen():SetNextScreenName( "ScreenSelectMusic" ):StartTransitioningScreen("SM_GoToNextScreen")
         end,
         ["Back"] = function()
             GAMESTATE:Env()["BackToMainMenu"] = true
+            GAMESTATE:Env()["GLOBALINTERFACEENV"] = "MainMenu"
             MESSAGEMAN:Broadcast("SelectedEntry")
-            SCREENMAN:GetTopScreen():SetPrevScreenName( "MainMenu" ):StartTransitioningScreen("SM_GoToPrevScreen")
+            SCREENMAN:GetTopScreen():SetPrevScreenName( "GlobalMenu" ):StartTransitioningScreen("SM_GoToPrevScreen")
         end
     }
     if not event.PlayerNumber then return end

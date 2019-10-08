@@ -11,7 +11,12 @@ t[#t+1] = Def.ActorFrame{
 	Def.Sprite{
 		Texture=THEME:GetPathG("Global/Header","Under"),
 		OnCommand=function(s) s:xy( 0,48 ):halign(0):zoom(1.1):addy( -SCREEN_RIGHT/2 ):decelerate(0.6):addy( SCREEN_RIGHT/2 ) end,
-		OffCommand=function(s) s:accelerate(0.6):addy( -SCREEN_RIGHT/2 ) end
+		OffCommand=function(s) s:accelerate(0.6):addy( -SCREEN_RIGHT/2 ) end,
+		CancelMessageCommand=function(s)
+			GAMESTATE:Env()["BackFromWorkout"] = true
+			SOUND:DimMusic(0,0.6)
+			GAMESTATE:Env()["GLOBALINTERFACEENV"] = "MainMenu"
+		end,
 	},
 	
 	Def.BitmapText{
@@ -72,6 +77,7 @@ t[#t+1] = Def.Quad{
 		s:stretchto(0,0,SCREEN_WIDTH,SCREEN_HEIGHT):diffuse( Alpha(Color.Black,0) )
 	end,
 	OffCommand=function(s) s:sleep(0.6):linear(1):diffusealpha(1) end,
+	CancelMessageCommand=function(s) s:linear(0.6):diffusealpha(1) end,
 }
 
 

@@ -7,7 +7,7 @@ local Items = {
     {"Records","Workout","Options"}
 }
 local OptionSelect = {
-    {nil,"PlayerSelect",nil,nil},
+    {nil,"PlayerSelect",nil,"Information"},
     {nil,"WorkoutMenu","ScreenOptionsService"}
 }
 
@@ -35,7 +35,8 @@ local function Input(event)
             SOUND:PlayOnce( THEME:GetPathS("Common","start") )
             if OptionSelect[cursorindex[2]][cursorindex[1]] then
                 MESSAGEMAN:Broadcast("SelectedEntry")
-                SCREENMAN:GetTopScreen():SetNextScreenName( OptionSelect[cursorindex[2]][cursorindex[1]] ):StartTransitioningScreen("SM_GoToNextScreen")
+                GAMESTATE:Env()["GLOBALINTERFACEENV"] = OptionSelect[cursorindex[2]][cursorindex[1]]
+                SCREENMAN:GetTopScreen():SetNextScreenName( "GlobalMenu" ):StartTransitioningScreen("SM_GoToNextScreen")
             end
         end
     }
@@ -48,6 +49,7 @@ end
 
 local t = Def.ActorFrame{}
 local RI = Def.ActorFrame{
+    InitCommand=function(s) MESSAGEMAN:Broadcast("UpdateBackground") end,
     OnCommand=function(s)
         s:fov(90):rotationy(-20):xy( 10,50 )
         MESSAGEMAN:Broadcast("CursorChanged")
@@ -146,7 +148,7 @@ t[#t+1] = Def.Quad{
         end
 	end,
     OffCommand=function(s)
-        if (cursorindex[2] == 2 and cursorindex[1] == 2) then
+        if (cursorindex[2] == 2 and cursorindex[1] == 2) or (cursorindex[2] == 1 and cursorindex[1] == 4) then
             s:linear(0.5):diffusealpha(1)
         end
     end,

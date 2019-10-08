@@ -31,8 +31,9 @@ local function Input(event)
         ["Back"] = function()
             GAMESTATE:Env()["BackFromWorkout"] = true
             GAMESTATE:Env()["BackToMainMenu"] = true
+            GAMESTATE:Env()["GLOBALINTERFACEENV"] = "MainMenu"
             MESSAGEMAN:Broadcast("SelectedEntry")
-            SCREENMAN:GetTopScreen():SetPrevScreenName( "MainMenu" ):StartTransitioningScreen("SM_GoToPrevScreen")
+            SCREENMAN:GetTopScreen():SetPrevScreenName( "GlobalMenu" ):StartTransitioningScreen("SM_GoToPrevScreen")
         end
     }
     if not event.PlayerNumber then return end
@@ -44,6 +45,7 @@ end
 
 local t = Def.ActorFrame{}
 local RI = Def.ActorFrame{
+    InitCommand=function(s) MESSAGEMAN:Broadcast("UpdateBackground") end,
     OnCommand=function(s)
         MESSAGEMAN:Broadcast("CursorChanged")
         SCREENMAN:GetTopScreen():AddInputCallback(Input)
