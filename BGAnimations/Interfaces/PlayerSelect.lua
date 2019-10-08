@@ -29,12 +29,14 @@ local function Input(event)
             GAMESTATE:SetCurrentStyle( Items[cursorindex] )
             if Items[cursorindex] == "single" then GAMESTATE:JoinPlayer(pn) end
             if Items[cursorindex] == "versus" then GAMESTATE:JoinPlayer(PLAYER_1) GAMESTATE:JoinPlayer(PLAYER_2) end
-            SCREENMAN:GetTopScreen():SetNextScreenName( "CharacterSelect" ):StartTransitioningScreen("SM_GoToNextScreen")
+            GAMESTATE:Env()["GLOBALINTERFACEENV"] = "CharacterSelect"
+            SCREENMAN:GetTopScreen():SetNextScreenName( "GlobalMenu" ):StartTransitioningScreen("SM_GoToNextScreen")
         end,
         ["Back"] = function()
             GAMESTATE:Env()["BackToMainMenu"] = true
+            GAMESTATE:Env()["GLOBALINTERFACEENV"] = "MainMenu"
             MESSAGEMAN:Broadcast("SelectedEntry")
-            SCREENMAN:GetTopScreen():SetPrevScreenName( "MainMenu" ):StartTransitioningScreen("SM_GoToPrevScreen")
+            SCREENMAN:GetTopScreen():SetPrevScreenName( "GlobalMenu" ):StartTransitioningScreen("SM_GoToPrevScreen")
         end
     }
     if not event.PlayerNumber then return end

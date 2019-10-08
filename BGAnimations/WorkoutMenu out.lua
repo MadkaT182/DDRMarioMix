@@ -1,1 +1,0 @@
-return Def.ActorFrame{ OnCommand=function(s) s:sleep(0.6) end }
