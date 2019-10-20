@@ -92,6 +92,7 @@ for _,pn in pairs( GAMESTATE:GetEnabledPlayers() ) do
 	p[#p+1] = Def.Quad{ OnCommand=function(s) s:zoomto(118,200):vertalign(top):y(-66):diffuse( color("#00000066") ) end }
 	p[#p+1] = Def.Sprite{ Texture=THEME:GetPathG("","MusicSelection/"..ToEnumShortString(pn).."Label"), OnCommand=function(s) s:xy(-36,-50) end }
 	p[#p+1] = Def.Sprite{ Texture=THEME:GetPathG("","MusicSelection/DiffLabel"), OnCommand=function(s) s:y(30) end }
+	p[#p+1] = Def.Sprite{ Texture=THEME:GetPathG("","MusicSelection/MushLabel"), OnCommand=function(s) s:y(-24) end }
 	p[#p+1] = Def.Sprite{ Texture=THEME:GetPathG("","MusicSelection/ScoreBG"), OnCommand=function(s) s:y(140) end }
 	p[#p+1] = Def.BitmapText{
 		Font="HighScore numbers", OnCommand=function(s) s:y(140) end,
