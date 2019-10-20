@@ -1,4 +1,5 @@
--- PlayerSelect Implementation
+--------------------------------
+-- Player Select
 --------------------------------
 
 -- Begin Items
@@ -23,14 +24,11 @@ local function Input(event)
         ["Start"] = function(pn)
             SOUND:PlayOnce( THEME:GetPathS("Common","start") )
             MESSAGEMAN:Broadcast("SelectedEntry")
-            -- if OptionSelect[cursorindex[2]][cursorindex[1]] then
-                -- SCREENMAN:GetTopScreen():SetNextScreenName( OptionSelect[cursorindex[2]][cursorindex[1]] ):StartTransitioningScreen("SM_GoToNextScreen")
-            -- end
             GAMESTATE:SetCurrentStyle( Items[cursorindex] )
             if Items[cursorindex] == "single" then GAMESTATE:JoinPlayer(pn) end
             if Items[cursorindex] == "versus" then GAMESTATE:JoinPlayer(PLAYER_1) GAMESTATE:JoinPlayer(PLAYER_2) end
-            GAMESTATE:Env()["GLOBALINTERFACEENV"] = "CharacterSelect"
-            SCREENMAN:GetTopScreen():SetNextScreenName( "GlobalMenu" ):StartTransitioningScreen("SM_GoToNextScreen")
+            GAMESTATE:Env()["GLOBALINTERFACEENV"] = CHARMAN:GetCharacterCount() > 1 and "CharacterSelect" or nil
+            SCREENMAN:GetTopScreen():SetNextScreenName( GAMESTATE:Env()["GLOBALINTERFACEENV"] ~= nil and "GlobalMenu" or "ScreenSelectMusic" ):StartTransitioningScreen("SM_GoToNextScreen")
         end,
         ["Back"] = function()
             GAMESTATE:Env()["BackToMainMenu"] = true
@@ -75,7 +73,13 @@ for s,v in ipairs(Items) do
     }
 end
 
-t[#t+1] = loadfile( THEME:GetPathG("","Global/SkyBG.lua") )()
+t[#t+1] = loadfile( THEME:GetPathG("","Global/SkyBG.lua") )()..{
+    OffCommand=function(s)
+        if not GAMESTATE:Env()["BackToMainMenu"] and CHARMAN:GetCharacterCount() < 1 then
+            s:linear(0.6):diffusealpha(0)
+        end
+    end,
+}
 t[#t+1] = RI;
 
 t[#t+1] = Def.Sprite{
