@@ -1,4 +1,5 @@
--- PlayerSelect Implementation
+--------------------------------
+-- Character Selection
 --------------------------------
 
 -- Begin Items

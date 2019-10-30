@@ -1,4 +1,5 @@
--- PlayerSelect Implementation
+--------------------------------
+-- Workout Menu
 --------------------------------
 
 -- Begin Items
@@ -89,7 +90,7 @@ t[#t+1] = RI;
 
 t[#t+1] = Def.Sprite{
     Texture=THEME:GetPathG("Global/Header","Under"),
-    OnCommand=function(s) s:xy( 0,55 ):halign(0):zoomx(0.9) end,
+    OnCommand=function(s) s:y( 55 ):halign(0):zoomx(0.9) end,
     SelectedEntryMessageCommand=function(s) if not GAMESTATE:Env()["BackFromWorkout"] then s:accelerate(0.6):addy( -SCREEN_RIGHT/2 ) end end,
 }
 
@@ -132,7 +133,7 @@ t[#t+1] = Def.ActorFrame{
 t[#t+1] = Def.Sprite{
     Texture=THEME:GetPathG("","Workout/WorkoutInfoBar"),
     OnCommand=function(s)
-        s:halign(0):xy(0,SCREEN_CENTER_Y)
+        s:halign(0):y(SCREEN_CENTER_Y)
     end,
 }
 

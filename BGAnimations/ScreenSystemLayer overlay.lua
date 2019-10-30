@@ -23,7 +23,8 @@ t[#t+1] = Def.ActorFrame {
 		OffCommand=function(self) self:sleep(3):linear(0.5):diffusealpha(0) end,
 	},
 
-	LoadFont("Common normal")..{
+	Def.BitmapText{
+		Font="Common normal",
 		Name="Text",
 		InitCommand=function(self)
 			self:maxwidth(750):horizalign(left):vertalign(top)

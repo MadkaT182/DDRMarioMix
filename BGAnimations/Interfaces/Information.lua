@@ -1,4 +1,5 @@
--- PlayerSelect Implementation
+--------------------------------
+-- Information Screen
 --------------------------------
 
 -- Begin Items
