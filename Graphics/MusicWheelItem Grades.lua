@@ -8,7 +8,7 @@ return Def.Sprite{
     Texture=THEME:GetPathG("","MusicSelection/Grades"),
     OnCommand=function(s) s:animate(0) end,
     SetGradeCommand=function(s,param)
-        state = grades[param.Grade]
-        s:setstate( state ~= nil and state or 5 )
+        state = grades[param.Grade] and grades[param.Grade] > num and num or grades[param.Grade]
+        s:setstate( state ~= nil and state-1 or 5 )
     end,
 }
