@@ -38,6 +38,8 @@ local function Input(event)
                 MESSAGEMAN:Broadcast("SelectedEntry")
                 GAMESTATE:Env()["GLOBALINTERFACEENV"] = OptionSelect[cursorindex[2]][cursorindex[1]]
                 SCREENMAN:GetTopScreen():SetNextScreenName( "GlobalMenu" ):StartTransitioningScreen("SM_GoToNextScreen")
+            else
+                SCREENMAN:SystemMessage("This option is not available yet!")
             end
         end
     }
