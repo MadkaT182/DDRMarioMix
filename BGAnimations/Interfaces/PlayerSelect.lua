@@ -28,7 +28,7 @@ local function Input(event)
             if Items[cursorindex] == "single" then GAMESTATE:JoinPlayer(pn) end
             if Items[cursorindex] == "versus" then GAMESTATE:JoinPlayer(PLAYER_1) GAMESTATE:JoinPlayer(PLAYER_2) end
             GAMESTATE:Env()["GLOBALINTERFACEENV"] = CHARMAN:GetCharacterCount() > 1 and "CharacterSelect" or nil
-            SCREENMAN:GetTopScreen():SetNextScreenName( GAMESTATE:Env()["GLOBALINTERFACEENV"] ~= nil and "GlobalMenu" or "ScreenSelectMusic" ):StartTransitioningScreen("SM_GoToNextScreen")
+            SCREENMAN:GetTopScreen():SetNextScreenName( GAMESTATE:Env()["GLOBALINTERFACEENV"] ~= nil and "GlobalMenu" or "ScreenProfileLoad" ):StartTransitioningScreen("SM_GoToNextScreen")
         end,
         ["Back"] = function()
             GAMESTATE:Env()["BackToMainMenu"] = true
