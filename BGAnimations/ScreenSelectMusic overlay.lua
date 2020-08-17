@@ -155,7 +155,12 @@ t[#t+1] = Def.Quad{
 	OnCommand=function(s)
 		s:stretchto(0,0,SCREEN_WIDTH,SCREEN_HEIGHT):diffuse( Alpha(Color.Black,0) )
 	end,
-	OffCommand=function(s) s:sleep(0.6):linear(1):diffusealpha(1) end,
+	OffCommand=function(s)
+		s:sleep(0.6):linear(1):diffusealpha(1)
+	end,
+	ShowEnteringOptionsCommand=function(s)
+		s:stoptweening():linear(0.2):diffusealpha(0)
+	end,
 	CancelMessageCommand=function(s) s:linear(0.6):diffusealpha(1) end,
 }
 
