@@ -15,7 +15,7 @@ return Def.ActorFrame {
 		Name="Judgment",
 		Texture="Judgment Normal",
 		InitCommand=function(self) self:pause() end,
-        OnCommand=THEME:GetMetric("Judgment","JudgmentOnCommand"),
+        OnCommand=function(self) self:xy( 13, 29 ) end,
         ResetCommand=function(self) self:finishtweening():stopeffect():visible(false) end
 	},
     JudgmentMessageCommand=function(self, params)
