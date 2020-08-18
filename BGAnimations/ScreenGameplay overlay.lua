@@ -37,7 +37,10 @@ for _,pn in pairs( GAMESTATE:GetEnabledPlayers() ) do
 						:xy( SCREEN_CENTER_X-(177*side),SCREEN_TOP ):zoomx( side )
 					end
 				end
-			}
+			},
+			OffCommand=function(self)
+				self:linear(0.8):addy( -200 )
+			end
 		};
 		Def.ActorFrame{
 			InitCommand=function(s) s:y(SCREEN_BOTTOM-56):addy( 200 ):linear(0.8):addy( -200 ) end,
@@ -52,6 +55,9 @@ for _,pn in pairs( GAMESTATE:GetEnabledPlayers() ) do
 					s:settext( string.format( "%09i" ,STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetScore() ) )
 				end;
 			},
+			OffCommand=function(self)
+				self:linear(0.8):addy( 200 )
+			end
 		};
 		Def.Sprite{
 			Texture=THEME:GetPathG("StepsDisplayGameplay","frame"),
@@ -60,7 +66,13 @@ for _,pn in pairs( GAMESTATE:GetEnabledPlayers() ) do
 				s:xy(SCREEN_CENTER_X-(257*side),po:Reverse() ~= 0 and SCREEN_TOP+53 or SCREEN_BOTTOM-66)
 				:pause():setstate(LoadSteps(s,pn))
 				:addx( -200*side ):linear(1):addx( 200*side )
-			end;
+			end,
+			OffCommand=function(self)
+				if SCREENMAN:GetTopScreen() then
+					SCREENMAN:GetTopScreen():GetChild("Player"..ToEnumShortString(pn)):linear(0.8):addx( -500*side )
+				end
+				self:linear(1):addx( -200*side )
+			end
 		}
 	}
 end

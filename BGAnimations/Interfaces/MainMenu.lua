@@ -32,6 +32,9 @@ local function Input(event)
         ["MenuRight"] = function() OffsetVerify( 1, 1 ) end,
         ["MenuUp"] = function() OffsetVerify( 2, -1 ) end,
         ["MenuDown"] = function() OffsetVerify( 2, 1 ) end,
+        ["Back"] = function()
+            SCREENMAN:GetTopScreen():SetPrevScreenName( "ScreenIntro" ):StartTransitioningScreen("SM_GoToPrevScreen")
+        end,
         ["Start"] = function()
             SOUND:PlayOnce( THEME:GetPathS("Common","start") )
             if OptionSelect[cursorindex[2]][cursorindex[1]] then
